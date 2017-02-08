@@ -1,8 +1,8 @@
 gem 'rspec', '~> 2.4'
 require 'rspec'
-require 'pq/version'
+require 'arison/version'
 
-include Pq
+include Arison
 
 def capture_stdout
   out = StringIO.new

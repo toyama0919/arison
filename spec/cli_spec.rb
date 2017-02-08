@@ -1,13 +1,13 @@
 require 'spec_helper'
-require 'pq'
+require 'arison'
 
-describe Pq::CLI do
+describe Arison::CLI do
   before do
   end
 
   it "should stdout sample" do
     output = capture_stdout do
-      Pq::CLI.start(['sample'])
+      Arison::CLI.start(['sample'])
     end
     output.should == "This is your new task\n"
   end

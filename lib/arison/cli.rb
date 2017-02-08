@@ -4,7 +4,7 @@ require 'yaml'
 require 'json'
 require 'pp'
 
-module Pq
+module Arison
   class CLI < Thor
 
     map '--version' => :version

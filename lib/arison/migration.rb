@@ -1,4 +1,4 @@
-module Pq
+module Arison
   class Migration < ActiveRecord::Migration
     def self.run_dsl(dsl)
       eval dsl

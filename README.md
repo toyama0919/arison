@@ -1,4 +1,4 @@
-# pq [![Build Status](https://secure.travis-ci.org/toyama0919/pq.png?branch=master)](http://travis-ci.org/toyama0919/pq)
+# arison [![Build Status](https://secure.travis-ci.org/toyama0919/arison.png?branch=master)](http://travis-ci.org/toyama0919/arison)
 
 TODO: Summary
 
@@ -6,14 +6,14 @@ TODO: Description
 
 ## Examples
 
-    $ pq sample
+    $ arison sample
     #=> hoge
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'pq'
+    gem 'arison'
 
 And then execute:
 
@@ -21,7 +21,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install pq
+    $ gem install arison
 
 ## Contributing
 
@@ -33,9 +33,9 @@ Or install it yourself as:
 
 ## Information
 
-* [Homepage](https://github.com/toyama0919/pq)
-* [Issues](https://github.com/toyama0919/pq/issues)
-* [Documentation](http://rubydoc.info/gems/pq/frames)
+* [Homepage](https://github.com/toyama0919/arison)
+* [Issues](https://github.com/toyama0919/arison/issues)
+* [Documentation](http://rubydoc.info/gems/arison/frames)
 * [Email](mailto:toyama0919@gmail.com)
 
 ## Copyright

@@ -2,7 +2,7 @@ require 'active_record'
 require 'activerecord-import'
 require 'active_support'
 
-module Pq
+module Arison
   class Core
 
     def initialize(profile)
@@ -79,12 +79,12 @@ module Pq
 
     def create_table(table_name, data)
       first = data.class == Array ? data.first : data
-      if @connection.table_exists?(table_name)
+      if @connection.data_source_exists?(table_name)
         add_column_live(table_name, data)
         return 
       end
       create_table_dsl = get_create_table_dsl(table_name, first)
-      Pq::Migration.run_dsl(create_table_dsl)
+      Arison::Migration.run_dsl(create_table_dsl)
       add_column_live(table_name, data)
     end
 
@@ -166,7 +166,7 @@ module Pq
 
         diff_keys.each do |column|
           add_column_dsl = get_add_column_dsl(table_name, column, record)
-          Pq::Migration.run_dsl(add_column_dsl)
+          Arison::Migration.run_dsl(add_column_dsl)
         end
         ActiveRecord::Base.establish_connection(@profile)
       end

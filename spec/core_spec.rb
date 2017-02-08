@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'pq'
+require 'arison'
 
-describe Pq::Core do
+describe Arison::Core do
   before do
     @core = Core.new
   end

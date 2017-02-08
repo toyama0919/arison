@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'pq'
+require 'arison'
 
-Pq::CLI.start
+Arison::CLI.start
