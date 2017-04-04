@@ -1,6 +1,8 @@
 require 'active_record'
 require 'activerecord-import'
 require 'active_support'
+require 'logger'
+require 'pp'
 
 module Arison
   class Core
@@ -10,10 +12,11 @@ module Arison
       ActiveRecord::Base.establish_connection(@profile)
       ActiveRecord::Base.default_timezone = :local
       @connection = ActiveRecord::Base.connection
+      @logger = Logger.new(STDOUT)
     end
 
     def query(sql)
-    	@connection.exec_query(sql).to_a
+      @connection.exec_query(sql).to_a
     end
 
     def columns_with_table_name(table_name)
@@ -39,7 +42,13 @@ module Arison
         begin
           record = record.inject({}){ |result, (k, v)|
             length = limits[k]
-            result[k] = (length.nil? || v.nil? || v.class != String) ? v : v.slice(0, length)
+            result[k] = if (v.class == Array || v.class == Hash)
+              v.to_s
+            elsif (length.nil? || v.nil? || v.class != String)
+              v
+            else
+              v.slice(0, length)
+            end
             result
           }
           instance.attributes = record
@@ -51,7 +60,13 @@ module Arison
         end
       end
       instances.in_groups_of(10000, false) do |block|
-        klass.import(block)
+        begin
+          klass.import(block)
+        rescue => e
+          pp block
+          @logger.error "\n#{e.message}\n#{e.backtrace.join("\n")}"
+          raise
+        end
       end
     end
 
