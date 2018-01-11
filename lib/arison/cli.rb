@@ -12,9 +12,9 @@ module Arison
     map '-f' => :query_file
     map '-b' => :import
 
-    class_option :profile, aliases: '-p', type: :string, default: 'default', desc: 'profile by .database.yml'
+    class_option :profile, aliases: '-p', type: :string, default: DEFAULT_CONFIG_PROFILE, desc: 'profile by .database.yml'
     class_option :pretty, aliases: '-P', type: :boolean, default: false, desc: 'pretty print'
-    class_option :config, aliases: '--config', type: :string, default: "#{ENV['HOME']}/.database.yml", desc: 'config file'
+    class_option :config, aliases: '--config', type: :string, default: DEFAULT_CONFIG_FILE_PATH, desc: 'config file'
     def initialize(args = [], options = {}, config = {})
       super(args, options, config)
       @global_options = config[:shell].base.options
@@ -49,9 +49,8 @@ module Arison
     end
 
     desc 'import', 'import json data.'
-    option :data, type: :hash, desc: 'buffer'
-    option :source, aliases: '-s', type: :string, desc: 'source json file'
     option :table, aliases: '-t', type: :string, desc: 'table'
+    option :data, type: :hash, desc: 'buffer'
     def import
       data = (options[:data] ? [options[:data]] : nil) || @core.parse_json(STDIN.read)
       @core.create_table(options[:table], data)
