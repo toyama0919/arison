@@ -47,11 +47,14 @@ module Arison
       puts_json @core.columns_with_table_name(table_name)
     end
 
-    desc 'import', 'import'
-    def import(table)
-      data = @core.parse_json(STDIN.read)
-      @core.create_table(table, data)
-      @core.import(table, data)
+    desc 'import', 'import json data.'
+    option :data, type: :hash, desc: 'buffer'
+    option :source, aliases: '-s', type: :string, desc: 'source json file'
+    option :table, aliases: '-t', type: :string, desc: 'table'
+    def import
+      data = (options[:data] ? [options[:data]] : nil) || @core.parse_json(STDIN.read)
+      @core.create_table(options[:table], data)
+      @core.import(options[:table], data)
     end
 
     desc 'info', 'info'
