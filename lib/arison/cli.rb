@@ -18,9 +18,12 @@ module Arison
     def initialize(args = [], options = {}, config = {})
       super(args, options, config)
       @global_options = config[:shell].base.options
-      @config = YAML.load_file(@global_options[:config])
-      profile = @config[@global_options[:profile]]
-      @core = Core.new(profile)
+
+      if @global_options[:config] && File.exist?(@global_options[:config])
+        @config = YAML.load_file(@global_options[:config])
+        profile = @config[@global_options[:profile]]
+        @core = Core.new(profile)
+      end
     end
 
     desc 'query_inline', 'Sample task'
