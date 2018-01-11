@@ -5,8 +5,8 @@ require File.expand_path('../lib/arison/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.name          = "arison"
   gem.version       = Arison::VERSION
-  gem.summary       = %q{postgresql command line interface}
-  gem.description   = %q{postgresql command line interface}
+  gem.summary       = %q{activerecord-import by jsonl, command line interface}
+  gem.description   = %q{activerecord-import by jsonl, command line interface}
   gem.license       = "MIT"
   gem.authors       = ["Hiroshi Toyama"]
   gem.email         = "toyama0919@gmail.com"
