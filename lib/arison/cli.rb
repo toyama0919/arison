@@ -18,15 +18,15 @@ module Arison
     def initialize(args = [], options = {}, config = {})
       super(args, options, config)
       @global_options = config[:shell].base.options
-      @config = YAML.load_file(@global_options['config'])
-      profile = @config[@global_options['profile']]
+      @config = YAML.load_file(@global_options[:config])
+      profile = @config[@global_options[:profile]]
       @core = Core.new(profile)
     end
 
     desc 'query_inline', 'Sample task'
     option :query, aliases: '-q', type: :string, required: true, desc: 'query'
     def query_inline
-      puts_json @core.query(options['query'])
+      puts_json @core.query(options[:query])
     end
 
     desc 'query_file', 'query_file'
