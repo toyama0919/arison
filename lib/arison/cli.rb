@@ -52,7 +52,8 @@ module Arison
     option :table, aliases: '-t', type: :string, desc: 'table'
     option :data, type: :hash, desc: 'buffer'
     def import
-      data = (options[:data] ? [options[:data]] : nil) || @core.parse_json(STDIN.read)
+      data = (options[:data] ? options[:data] : nil) || Util.parse_json(STDIN.read)
+      data = [data] if data.class == Hash
       @core.create_table(options[:table], data)
       @core.import(options[:table], data)
     end

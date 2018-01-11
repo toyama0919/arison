@@ -88,7 +88,7 @@ module Arison
 
     def get_add_column_dsl(table_name, column_name, record)
       dsl = %Q{
-      add_column "#{table_name}", "#{column_name}", :#{get_type(column_name, record['column_name'])}
+      add_column "#{table_name}", "#{column_name}", :#{Util.get_type(column_name, record['column_name'])}
       }
     end
 
@@ -101,18 +101,6 @@ module Arison
       create_table_dsl = get_create_table_dsl(table_name, first)
       Arison::Migration.run_dsl(create_table_dsl)
       add_column_live(table_name, data)
-    end
-
-    def parse_json(buffer)
-      begin
-        data = JSON.parse(buffer)
-      rescue => e
-        data = []
-        buffer.lines.each do |line|
-          data << JSON.parse(line)
-        end
-      end
-      data
     end
 
     def get_class(table_name)
@@ -132,38 +120,8 @@ module Arison
 
     def get_column_schema(hash)
       hash.map do |k, v|
-        type = get_type(k, v)
+        type = Util.get_type(k, v)
         %Q{t.#{type} "#{k}"} unless type.nil?
-      end
-    end
-
-    def get_type(k, v)
-      if v.nil?
-        %Q{string}
-      elsif k =~ /^id$/i
-        nil
-      elsif v.class == String
-        to_time_or_nil(v).nil? ? %Q{string} : %Q{datetime}
-      elsif v.class == TrueClass || v.class == FalseClass
-        %Q{boolean}
-      elsif v.class == Fixnum
-        %Q{integer}
-      elsif v.class == Float
-        %Q{float}
-      elsif v.class == Array || v.class == Hash
-        %Q{text}
-      elsif v.respond_to?(:strftime)
-        %Q{datetime}
-      end
-    end
-
-    def to_time_or_nil(value)
-      return nil if value.slice(0, 4) !~ /^[0-9][0-9][0-9][0-9]/
-      begin
-        time = value.to_time
-        time.to_i >= 0 ? time : nil
-      rescue => e
-        nil
       end
     end
 

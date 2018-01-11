@@ -1,5 +1,6 @@
 require 'arison/version'
 require 'arison/constants'
+require 'arison/util'
 require 'arison/core'
 require 'arison/migration'
 require 'arison/cli'
