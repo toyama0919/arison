@@ -43,8 +43,9 @@ module Arison
     end
 
     desc 'columns', 'columns'
-    def columns(table_name)
-      puts_json @core.columns_with_table_name(table_name)
+    option :table, aliases: '-t', type: :string, desc: 'table'
+    def columns
+      puts_json @core.columns_with_table_name(options[:table])
     end
 
     desc 'import', 'import json data.'
