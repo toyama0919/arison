@@ -18,7 +18,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_dependency 'thor'
-  gem.add_dependency 'pg'
   gem.add_dependency 'activesupport'
   gem.add_dependency 'activerecord'
   gem.add_dependency 'activerecord-import'
