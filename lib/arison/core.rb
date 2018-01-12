@@ -34,6 +34,7 @@ module Arison
     end
 
     def import(table_name, data)
+      create_table(table_name, data)
       klass = get_class(table_name)
       limits = get_limit_hash(klass)
       instances = []
@@ -94,7 +95,7 @@ module Arison
 
     def create_table(table_name, data)
       first = data.class == Array ? data.first : data
-      if @connection.data_source_exists?(table_name)
+      if ActiveRecord::Base.connection.data_source_exists?(table_name.to_sym)
         add_column_live(table_name, data)
         return 
       end

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 require "thor"
-require 'yaml'
 require 'json'
 require 'pp'
 
@@ -20,8 +19,7 @@ module Arison
       @global_options = config[:shell].base.options
 
       if @global_options[:config] && File.exist?(@global_options[:config])
-        @config = YAML.load_file(@global_options[:config])
-        profile = @config[@global_options[:profile]]
+        profile = Util.get_profile(@global_options[:config], @global_options[:profile])
         @core = Core.new(profile)
       end
     end
@@ -54,7 +52,6 @@ module Arison
     def import
       data = (options[:data] ? options[:data] : nil) || Util.parse_json(STDIN.read)
       data = [data] if data.class == Hash
-      @core.create_table(options[:table], data)
       @core.import(options[:table], data)
     end
 

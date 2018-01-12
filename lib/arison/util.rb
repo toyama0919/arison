@@ -1,5 +1,12 @@
+require 'yaml'
+
 module Arison
   class Util
+    def self.get_profile(config_path, profile)
+      @config = YAML.load_file(config_path)
+      @config[profile]
+    end
+
     def self.parse_json(buffer)
       begin
         data = JSON.parse(buffer)
