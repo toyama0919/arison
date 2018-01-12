@@ -22,3 +22,11 @@ ensure
   $stderr = STDERR
 end
 
+def get_core
+  profile = {
+    adapter: "sqlite3",
+    database: 'tmp/core.db',
+    timeout: 500
+  }
+  Core.new(profile)
+end
