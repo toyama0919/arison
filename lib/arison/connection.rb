@@ -5,7 +5,7 @@ module Arison
       @core = Core.new(profile)
     end
 
-    def import(table, data, create_table: true)
+    def import(table, data)
       @core.import(table, data)
     end
   end
