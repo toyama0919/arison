@@ -7,8 +7,7 @@ module Arison
   class CLI < Thor
 
     map '--version' => :version
-    map '-s' => :query_inline
-    map '-f' => :query_file
+    map '-s' => :query
     map '-b' => :import
 
     class_option :profile, aliases: '-p', type: :string, default: DEFAULT_CONFIG_PROFILE, desc: 'profile by .database.yml'
@@ -25,14 +24,14 @@ module Arison
     end
 
     desc 'query_inline', 'Sample task'
-    option :query, aliases: '-q', type: :string, required: true, desc: 'query'
-    def query_inline
-      puts_json @core.query(options[:query])
-    end
-
-    desc 'query_file', 'query_file'
-    def query_file(file)
-      puts_json @core.query(File.read(file))
+    option :query, aliases: '-q', type: :string, desc: 'query'
+    option :file, aliases: '-f', type: :string, desc: 'file'
+    def query
+      file_sql = if options[:file] && File.exist?(options[:file])
+        File.read(options[:file])
+      end
+      query = options[:query] || file_sql || STDIN.read
+      puts_json @core.query(query)
     end
 
     desc 'tables', 'tables'
