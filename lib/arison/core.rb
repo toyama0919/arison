@@ -136,6 +136,7 @@ module Arison
     def add_column_live(table_name, data)
       data.each do |record|
         limits = get_limit_hash(get_class(table_name))
+        record = Hash[record.map { |k,v| [k.to_s,v] }]
         diff_keys = (record.keys - limits.keys)
 
         diff_keys.each do |column|
