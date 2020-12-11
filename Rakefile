@@ -26,15 +26,3 @@ end
 
 task :test    => :spec
 task :default => :spec
-
-begin
-  gem 'yard', '~> 0.8'
-  require 'yard'
-
-  YARD::Rake::YardocTask.new  
-rescue LoadError => e
-  task :yard do
-    abort "Please run `gem install yard` to install YARD."
-  end
-end
-task :doc => :yard
