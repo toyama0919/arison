@@ -7,7 +7,7 @@ A tool that predicts schema from data and easily populates the database.
 For example, set the following.
 
 ```yaml
-suggest:
+mydb:
   adapter: sqlite3
   database: /app/sqlite/suggest.db
   pool: 5
@@ -24,7 +24,7 @@ Arison.import(
     { column1: "test", column2: Time.now.to_i },
     { column1: "test2", column2: Time.now.to_i },
   ],
-  profile: "suggest"
+  profile: "mydb"
 )
 ```
 
@@ -39,6 +39,12 @@ sqlite> select * from my_table ;
 * Automatically generate table, and also generate column from data.
 * created_at and updated_at are also automatically created.
 
+
+## Command Line Interface
+
+```bash
+arison -b -p mydb -t my_table --data column1:"test" column2:1
+```
 
 ## Installation
 
