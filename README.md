@@ -1,13 +1,44 @@
 # arison [![Build Status](https://secure.travis-ci.org/toyama0919/arison.png?branch=master)](http://travis-ci.org/toyama0919/arison)
 
-TODO: Summary
+A tool that predicts schema from data and easily populates the database.
 
-TODO: Description
+## Examples Settings
 
-## Examples
+For example, set the following.
 
-    $ arison sample
-    #=> hoge
+```yaml
+suggest:
+  adapter: sqlite3
+  database: /app/sqlite/suggest.db
+  pool: 5
+  timeout: 5000
+```
+
+Execute code like below.
+
+```ruby
+require 'arison'
+Arison.import(
+  "my_table",
+  [
+    { column1: "test", column2: Time.now.to_i },
+    { column1: "test2", column2: Time.now.to_i },
+  ],
+  profile: "suggest"
+)
+```
+
+Then it looks like
+
+```
+sqlite> select * from my_table ;
+1|test|1607692573|2020-12-11 22:16:14.123455|2020-12-11 22:16:14.123455
+2|test2|1607692573|2020-12-11 22:16:14.123455|2020-12-11 22:16:14.123455
+```
+
+* Automatically generate table, and also generate column from data.
+* created_at and updated_at are also automatically created.
+
 
 ## Installation
 
