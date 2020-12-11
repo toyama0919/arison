@@ -44,7 +44,7 @@ module Arison
           record = record.inject({}){ |result, (k, v)|
             length = limits[k]
             result[k] = if (v.class == Array || v.class == Hash)
-              v.to_s
+              v.to_json
             elsif (length.nil? || v.nil? || v.class != String)
               v
             else
