@@ -19,7 +19,9 @@ module Arison
 
       if @global_options[:config] && File.exist?(@global_options[:config])
         profile = Util.get_profile(@global_options[:config], @global_options[:profile])
-        @core = Core.new(profile)
+        if profile
+          @core = Core.new(profile)
+        end
       end
     end
 
