@@ -28,7 +28,7 @@ module Arison
         to_time_or_nil(v).nil? ? %Q{string} : %Q{datetime}
       elsif v.class == TrueClass || v.class == FalseClass
         %Q{boolean}
-      elsif v.class == Fixnum
+      elsif v.class == Integer
         %Q{integer}
       elsif v.class == Float
         %Q{float}
