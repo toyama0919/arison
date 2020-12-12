@@ -1,6 +1,6 @@
 require 'active_record'
 require 'activerecord-import'
-require 'active_support'
+require 'active_support/core_ext/array/grouping'
 require 'logger'
 require 'pp'
 
