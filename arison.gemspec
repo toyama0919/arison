@@ -17,12 +17,14 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
+  gem.required_ruby_version = '>= 2.6.0'
+
   gem.add_dependency 'thor'
-  gem.add_dependency 'activesupport'
-  gem.add_dependency 'activerecord'
+  gem.add_dependency 'activesupport', '~> 5.2'
+  gem.add_dependency 'activerecord', '~> 5.2'
   gem.add_dependency 'activerecord-import'
 
-  gem.add_development_dependency 'sqlite3'
+  gem.add_development_dependency 'sqlite3', '~> 1.5.0'
   gem.add_development_dependency 'bundler'
   gem.add_development_dependency 'pry', '~> 0.10.1'
   gem.add_development_dependency 'rake', '~> 13.0'

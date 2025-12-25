@@ -10,7 +10,6 @@ module Arison
     def initialize(profile)
       @profile = profile
       ActiveRecord::Base.establish_connection(@profile)
-      ActiveRecord::Base.default_timezone = :local
       @connection = ActiveRecord::Base.connection
       @logger = Logger.new(STDOUT)
     end
@@ -97,7 +96,7 @@ module Arison
       first = data.class == Array ? data.first : data
       if ActiveRecord::Base.connection.data_source_exists?(table_name.to_sym)
         add_column_live(table_name, data)
-        return 
+        return
       end
       create_table_dsl = get_create_table_dsl(table_name, first)
       Arison::Migration.run_dsl(create_table_dsl)
@@ -127,7 +126,7 @@ module Arison
     end
 
     def get_limit_hash(klass)
-      columns(klass).inject({}){ |result, column| 
+      columns(klass).inject({}){ |result, column|
         result[column['name']] = column['limit']
         result
       }
