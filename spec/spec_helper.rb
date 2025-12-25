@@ -1,4 +1,5 @@
 require 'rspec'
+require 'fileutils'
 require 'arison/version'
 
 include Arison
