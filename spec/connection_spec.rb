@@ -86,3 +86,4 @@ describe Arison::Connection do
     end
   end
 end
+
